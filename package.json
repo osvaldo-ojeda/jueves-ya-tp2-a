@@ -1,0 +1,21 @@
+{
+  "name": "jueves-ya-tp2a",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "dev":"node --watch .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/osvaldo-ojeda/jueves-ya-tp2-a.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/osvaldo-ojeda/jueves-ya-tp2-a/issues"
+  },
+  "homepage": "https://github.com/osvaldo-ojeda/jueves-ya-tp2-a#readme"
+}
