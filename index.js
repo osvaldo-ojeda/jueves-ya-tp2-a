@@ -84,12 +84,100 @@ function heladito(str) {
 
 // console.log(heladito("bien"))
 
-heladito("bien")
-  .then((data) => {
-    console.log(`🚀 ~ data:`, data);
-  })
-  .catch((error) => {
-    console.log(`🚀 ~ error:`, error);
-  }).finally(()=>{
-    console.log("fin")
-  })
+// heladito("bien")
+//   .then((data) => {
+//     console.log(`🚀 ~ data:`, data);
+//   })
+//   .catch((error) => {
+//     console.log(`🚀 ~ error:`, error);
+//   }).finally(()=>{
+//     console.log("fin")
+//   })
+
+// ------------------
+
+// async function name(params) {
+//   try {
+//   } catch (error) {
+//   }
+// }
+
+const pedido = async () => {
+  try {
+    const respuesta = await fetch("https://pokeapi.co/api/v2/pokemon/ditto");
+    const data = await respuesta.json();
+    // console.log(`🚀 ~ pedido ~ data:`, data.forms[0].name)
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
+
+// console.log(pedido());
+
+// pedido()
+//   .then((data) => {
+//     console.log(`🚀 ~ data:`, data.forms[0].name);
+//   })
+//   .catch((error) => {
+//     console.log(`🚀 ~ error:`, error);
+//   })
+
+// async function nombre(fn) {
+//   try {
+//     const data = await fn();
+//     console.log(`🚀 ~ data:`, data.forms[0].name);
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+// nombre(pedido)
+
+// const arr=[1,2,3,4,5]
+// console.log(`🚀 ~ arr:`, arr)
+
+// const arr2=arr.splice(1,2)
+// console.log(`🚀 ~ arr2:`, arr2)
+// console.log(`🚀 ~ arr:`, arr)
+
+// const arr3= arr.slice(4)
+// console.log(`🚀 ~ arr3:`, arr3)
+// console.log(`🚀 ~ arr:`, arr)
+
+const urls = [
+  "https://jsonplaceholder.typicode.com/users/1",
+  "https://jsonplaceholder.typicode.com/users/2",
+  "https://jsonplaceholder.typicode.com/users/3",
+];
+
+// const nombresApi = async () => {
+//   try {
+//     const promesa = urls.map((url) => fetch(url).then((res) => res.json()));
+//     // console.log(`🚀 ~ nombresApi ~ promesa:`, promesa);
+//     const respuesta = await Promise.all(promesa);
+//     // console.log(`🚀 ~ nombresApi ~ respuesta:`, respuesta);
+//     respuesta.forEach((data) => {
+//       console.log(`🚀 ~ nombresApi ~ data:`, data.name);
+//     });
+//   } catch (error) {
+//     console.log(`🚀 ~ nombresApi ~ error:`, error);
+//   }
+// };
+
+const nombresApi = async () => {
+  try {
+    const usuarios = async (usersUrl) => {
+      const res = await fetch(usersUrl);
+      return await res.json();
+    };
+    const promesas = urls.map((url) => usuarios(url));
+    // console.log(`🚀 ~ nombresApi ~ promesas:`, promesas);
+     const respuesta = await Promise.all(promesas);
+     console.log(`🚀 ~ nombresApi ~ respuesta:`, respuesta)
+  } catch (error) {
+    console.log(`🚀 ~ nombresApi ~ error:`, error);
+  }
+};
+
+nombresApi();
