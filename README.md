@@ -1,4 +1,4 @@
-# Clase 6: Creación de Servidores con Express.js
+# Clase 5: Creación de Servidores con Express.js
 
 ## Objetivos
 - Comprender el rol de un servidor web y el protocolo HTTP.
