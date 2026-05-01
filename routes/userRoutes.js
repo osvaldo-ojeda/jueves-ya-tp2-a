@@ -1,31 +1,15 @@
 import {Router} from "express"
+import userController from "../containers/userContainer.js"
+import autenticar from "../midlewares/autenticar.js"
 
 const userRoutes= Router()
 
-userRoutes.get("/", (req, res)=>{
-res.status(200).send("get all users /")
-})
-
-userRoutes.get("/:id", (req, res)=>{
-console.log(`🚀 ~ req.query:`, req.query)
-const {id}= req.params
-res.status(200).send(`get user by id:${id} `)
-})
-
-userRoutes.post("/", (req, res)=>{
-console.log(`🚀 ~ req:`, req.body)
-res.status(200).send("post user /")
-})
-
-userRoutes.put("/:id", (req, res)=>{
-const {id}= req.params
-res.status(200).send(`put user by id:${id}`)
-})
-
-userRoutes.delete("/:id", (req, res)=>{
-const {id}= req.params
-res.status(200).send(`delete user by id :${id}`)
-})
+userRoutes.get("/", userController.getAllUsers)
+userRoutes.get("/:id", userController.getuserById)
+userRoutes.use(autenticar)
+userRoutes.post("/", userController.createUser)
+userRoutes.put("/:id",userController.updateUser)
+userRoutes.delete("/:id", userController.deleteUser)
 
 
 export default userRoutes
