@@ -6,7 +6,7 @@ const userRoutes= Router()
 
 userRoutes.get("/", userController.getAllUsers)
 userRoutes.get("/:id", userController.getuserById)
-userRoutes.use(autenticar)
+// userRoutes.use(autenticar)
 userRoutes.post("/", userController.createUser)
 userRoutes.put("/:id",userController.updateUser)
 userRoutes.delete("/:id", userController.deleteUser)
