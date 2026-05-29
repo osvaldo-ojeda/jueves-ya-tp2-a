@@ -3,6 +3,7 @@ import router from "./routes/router.js";
 import morgan from "morgan";
 import { notFound } from "./midlewares/notFound.js";
 import sequelize from "./connection/sequelize.js";
+import { SERVER_PORT } from "./config/config.js";
 
 const app = express();
 
@@ -12,10 +13,10 @@ app.use(morgan("dev"));
 
 app.use(router);
 
-await sequelize.sync({ force: false })
+await sequelize.sync({ alter: true})
 
 app.use(notFound)
 
-app.listen(8000, () => {
-  console.log(`🚀 ~ server ok on port http://localhost:8000`);
+app.listen(SERVER_PORT, () => {
+  console.log(`🚀 ~ server ok on port http://localhost:${SERVER_PORT}`);
 });

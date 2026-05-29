@@ -6,16 +6,17 @@ class UserController {
   getAllUsers = async (req, res) => {
     try {
       const users = await this.userService.getAllUsers();
-      console.log(`🚀 ~ UserController ~ users:`, users)
       res.status(200).send({ success: true, message: users });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
   };
 
-  getuserById = (req, res) => {
+  getuserById = async(req, res) => {
     try {
-      res.status(200).send({ success: true, message: "get user by id" });
+      const {id}= req.params
+      const user= await this.userService.getUserById(id)
+      res.status(200).send({ success: true, message: user});
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
@@ -23,9 +24,9 @@ class UserController {
 
   createUser = async (req, res) => {
     try {
-      const { name, email } = req.body;
+      const { name, email, password, roleId } = req.body;
       if (!name) throw new Error("nombre is required");
-      const user = await this.userService.createUser({name, email});
+      const user = await this.userService.createUser({name, email, password, roleId});
       res.status(200).send({ success: true, message: user });
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
