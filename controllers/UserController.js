@@ -48,6 +48,15 @@ class UserController {
       res.status(400).send({ success: false, message: error.message });
     }
   };
+  login=async (req, res) => {
+    try {
+      const { email, password } = req.body;
+      const user = await this.userService.login({ email, password});
+      res.status(200).send({ success: true, message: user });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
 }
 
 export default UserController;

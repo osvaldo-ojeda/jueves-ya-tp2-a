@@ -1,7 +1,21 @@
 import { DataTypes, Model } from "sequelize";
 import sequelize from "../connection/sequelize.js";
 
-class User extends Model {}
+import bcrypt from "bcrypt";
+
+class User extends Model {
+  // metodo de instancia
+  // validatePassword = async (password) => {
+  //   const isValid = await bcrypt.compare(password, this.password);
+  //   return isValid;
+  // };
+
+  // metodo de clase
+  static validatePassword = async (passwordPlain, passwordHash) => {
+    const isValid = await bcrypt.compare(passwordPlain, passwordHash);
+    return isValid;
+  };
+}
 
 User.init(
   {
@@ -35,5 +49,13 @@ User.init(
     modelName: "User",
   },
 );
+
+User.beforeCreate(async(user)=>{
+  const salt= await bcrypt.genSalt(10)
+  const hash= await bcrypt.hash(user.password, salt)
+  user.password=hash
+})
+
+
 
 export default User;
