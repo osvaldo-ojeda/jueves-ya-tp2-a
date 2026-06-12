@@ -1,3 +1,5 @@
+import { generateToken, verifyToken } from "../utils/jwt.js";
+
 class UserService {
   constructor(user, role) {
     this.user = user;
@@ -35,15 +37,26 @@ class UserService {
       attributes: ["id", "name", "email", "password", "roleId"],
     });
     if (!user) throw new Error("user not found");
-    const validatePassword = await this.user.validatePassword(password, user.password);
-    console.log(`🚀 ~ UserService ~ validatePassword:`, validatePassword)
+    const validatePassword = await this.user.validatePassword(
+      password,
+      user.password,
+    );
+    console.log(`🚀 ~ UserService ~ validatePassword:`, validatePassword);
     if (!validatePassword) throw new Error("invalid password");
-    return {
+
+    const payload = {
       id: user.id,
       name: user.name,
-      email: user.email,
       roleId: user.roleId,
     };
+
+    const token = generateToken(payload);
+    return { token, id: user.id };
+  };
+
+  me = async (payload) => {
+    const user = verifyToken(payload);
+    return user;
   };
 }
 

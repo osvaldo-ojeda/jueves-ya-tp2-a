@@ -7,6 +7,8 @@ const DB_USER = env.DB_USER;
 const DB_PASSWORD = env.DB_PASSWORD;
 const DB_NAME = env.DB_NAME;
 const DB_DIALECT = env.DB_DIALECT;
+const SECRET= env.SECRET
+
 
 export {
   SERVER_PORT,
@@ -16,4 +18,5 @@ export {
   DB_PASSWORD,
   DB_NAME,
   DB_DIALECT,
+  SECRET
 };

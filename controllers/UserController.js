@@ -52,7 +52,17 @@ class UserController {
     try {
       const { email, password } = req.body;
       const user = await this.userService.login({ email, password});
-      res.status(200).send({ success: true, message: user });
+      res.cookie("payload", user.token)
+      res.status(200).send({ success: true, message: user.id });
+    } catch (error) {
+      res.status(400).send({ success: false, message: error.message });
+    }
+  };
+  me=async (req, res) => {
+    try {
+      const {payload} = req.cookies
+      const user = await this.userService.me(payload);
+      res.status(200).send({ success: true, message: user});
     } catch (error) {
       res.status(400).send({ success: false, message: error.message });
     }
